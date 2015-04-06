@@ -104,6 +104,23 @@ def get_hotellist_page(city_url, page_count, city, datadir='data/'):
         h.write(html)
     return html
 
+
+#*TODO*
+def get_hotel_page(hotel_url, hotel_name, datadir='data/'):
+
+    url = base_url + city_url
+    # Sleep 2 sec before starting a new http request
+    time.sleep(2)
+    # Request page
+    headers = { 'User-Agent' : user_agent }
+    response = requests.get(url, headers=headers)
+    html = response.text.encode('utf-8')
+    # Save the webpage
+    with open(os.path.join(datadir, city + '-hotelist-' + str(page_count) + '.html'), "w") as h:
+        h.write(html)
+    return html
+
+
 #ERROR OCCURS IN THIS FUNCTION 
 def parse_hotellist_page(html):
     """Parses the website with the hotel list and prints the hotel name, the
